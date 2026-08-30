@@ -1,0 +1,300 @@
+- generic [active] [ref=e1]:
+  - link "Chuyển đến nội dung chính" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic "Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫. Di chuột hoặc đặt tiêu điểm để tạm dừng." [ref=e4]:
+      - generic [ref=e5]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+          - generic [ref=e10]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+          - generic [ref=e12]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+        - generic [ref=e14]:
+          - generic [ref=e15]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+          - generic [ref=e17]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+          - generic [ref=e19]: Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫
+    - banner [ref=e21]:
+      - generic [ref=e22]:
+        - button "Mở menu điều hướng" [ref=e23] [cursor=pointer]
+        - link "LUXE ROTATE, về trang chủ" [ref=e26] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000
+          - text: LUXE/ROTATE
+        - generic [ref=e27]:
+          - button "Mở tìm kiếm" [ref=e28] [cursor=pointer]
+          - button "Mở giỏ hàng" [ref=e32] [cursor=pointer]:
+            - status [ref=e36]: 0 sản phẩm trong giỏ
+  - main [ref=e37]:
+    - region [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e41]:
+          - paragraph [ref=e42]: Thời trang tuần hoàn cao cấp
+          - heading "Một tủ đồ. Vô hạn dịp." [level=1] [ref=e43]: Một tủ đồ.Vô hạn dịp.
+          - paragraph [ref=e44]: Thuê thiết kế cao cấp từ những gian hàng đã kiểm duyệt. Lịch trống cập nhật theo thời gian thực, tư vấn phong cách bằng AI và tiền cọc được bảo vệ đến khi hoàn tất kiểm định.
+          - generic [ref=e45]:
+            - link "Khám phá bộ sưu tập" [ref=e46] [cursor=pointer]:
+              - /url: "#bo-suu-tap"
+            - link "Hỏi AI Stylist" [ref=e47] [cursor=pointer]:
+              - /url: "#cong-nghe"
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - term [ref=e50]: 500+
+              - definition [ref=e51]: Thiết kế
+            - generic [ref=e52]:
+              - term [ref=e53]: "48"
+              - definition [ref=e54]: Atelier
+            - generic [ref=e55]:
+              - term [ref=e56]: 4.9/5
+              - definition [ref=e57]: Đánh giá
+        - figure "Biên tập mùa tiệc 2026 của LUXE ROTATE" [ref=e58]:
+          - img "Ba người mẫu Việt Nam trong váy dạ hội đen, suit trắng và tuxedo cao cấp" [ref=e59]
+    - region "Cam kết dịch vụ" [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - text: "01"
+          - paragraph [ref=e64]: Lịch trống thời gian thực
+        - generic [ref=e65]:
+          - text: "02"
+          - paragraph [ref=e66]: Giặt hấp sau mỗi lượt thuê
+        - generic [ref=e67]:
+          - text: "03"
+          - paragraph [ref=e68]: Cọc tạm giữ minh bạch
+        - generic [ref=e69]:
+          - text: "04"
+          - paragraph [ref=e70]: Giao nhận tận nơi
+    - region [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - paragraph [ref=e74]: Biên tập theo dịp
+          - heading "Chọn diện mạo của bạn" [level=2] [ref=e75]
+        - link "Xem tất cả" [ref=e76] [cursor=pointer]:
+          - /url: "#san-pham"
+      - generic [ref=e77]:
+        - link "Váy dạ hội đen dáng dài 01 / Dạ hội Black Tie" [ref=e78] [cursor=pointer]:
+          - /url: "#san-pham"
+          - img "Váy dạ hội đen dáng dài" [ref=e79]
+          - generic [ref=e80]:
+            - generic [ref=e81]: 01 / Dạ hội
+            - generic [ref=e82]: Black Tie
+        - link "Suit trắng cao cấp phong cách tối giản 02 / Thành thị Modern Tailoring" [ref=e83] [cursor=pointer]:
+          - /url: "#san-pham"
+          - img "Suit trắng cao cấp phong cách tối giản" [ref=e84]
+          - generic [ref=e85]:
+            - generic [ref=e86]: 02 / Thành thị
+            - generic [ref=e87]: Modern Tailoring
+        - link "Hai người mẫu trong trang phục dự tiệc thanh lịch 03 / Tiệc cưới Wedding Guest" [ref=e88] [cursor=pointer]:
+          - /url: "#san-pham"
+          - img "Hai người mẫu trong trang phục dự tiệc thanh lịch" [ref=e89]
+          - generic [ref=e90]:
+            - generic [ref=e91]: 03 / Tiệc cưới
+            - generic [ref=e92]: Wedding Guest
+    - region [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - paragraph [ref=e97]: Đang được đặt nhiều
+            - heading "Lựa chọn của biên tập" [level=2] [ref=e98]
+          - paragraph [ref=e99]: Mỗi thiết kế được kiểm định chất liệu, tình trạng và số đo thực tế trước khi xuất hiện trên nền tảng.
+        - generic [ref=e100]:
+          - article [ref=e101]:
+            - generic [ref=e102]:
+              - link "Xem Noir Sculpted Gown" [ref=e103] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/products/noir-sculpted-gown
+                - img "Noir Sculpted Gown của Maison Élan" [ref=e104]
+              - generic [ref=e105]: CÓ SẴN
+              - button "Thêm Noir Sculpted Gown vào yêu thích" [ref=e106] [cursor=pointer]
+              - generic [ref=e109]:
+                - button "THUÊ ĐỒ" [ref=e110] [cursor=pointer]
+                - button "MUA NGAY" [ref=e111] [cursor=pointer]
+            - generic [ref=e112]:
+              - paragraph [ref=e113]: Maison Élan
+              - heading [level=3] [ref=e114]:
+                - link "Noir Sculpted Gown" [ref=e115] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/products/noir-sculpted-gown
+              - generic [ref=e116]:
+                - generic [ref=e117]:
+                  - paragraph [ref=e118]: "Thuê: 890.000đ / ngày"
+                  - paragraph [ref=e119]: "(Cọc: 2.500.000đ — Hoàn sau khi trả đồ)"
+                - paragraph [ref=e120]: "Mua đứt: 6.800.000đ"
+              - generic "Kích cỡ khả dụng" [ref=e121]:
+                - generic [ref=e122]: XS
+                - generic [ref=e123]: S
+                - generic [ref=e124]: M
+          - article [ref=e125]:
+            - generic [ref=e126]:
+              - link "Xem Ivory Fluid Suit" [ref=e127] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/products/ivory-fluid-suit
+                - img "Ivory Fluid Suit của Atelier Blanc" [ref=e128]
+              - generic [ref=e129]: CÓ SẴN
+              - button "Thêm Ivory Fluid Suit vào yêu thích" [ref=e130] [cursor=pointer]
+              - generic [ref=e133]:
+                - button "THUÊ ĐỒ" [ref=e134] [cursor=pointer]
+                - button "MUA NGAY" [ref=e135] [cursor=pointer]
+            - generic [ref=e136]:
+              - paragraph [ref=e137]: Atelier Blanc
+              - heading [level=3] [ref=e138]:
+                - link "Ivory Fluid Suit" [ref=e139] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/products/ivory-fluid-suit
+              - generic [ref=e140]:
+                - generic [ref=e141]:
+                  - paragraph [ref=e142]: "Thuê: 760.000đ / ngày"
+                  - paragraph [ref=e143]: "(Cọc: 2.200.000đ — Hoàn sau khi trả đồ)"
+                - paragraph [ref=e144]: "Mua đứt: 5.900.000đ"
+              - generic "Kích cỡ khả dụng" [ref=e145]:
+                - generic [ref=e146]: S
+                - generic [ref=e147]: M
+          - article [ref=e148]:
+            - generic [ref=e149]:
+              - link "Xem Midnight Tuxedo" [ref=e150] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/products/midnight-tuxedo
+                - img "Midnight Tuxedo của Noir Homme" [ref=e151]
+              - generic [ref=e152]: CÓ SẴN
+              - button "Thêm Midnight Tuxedo vào yêu thích" [ref=e153] [cursor=pointer]
+              - generic [ref=e156]:
+                - button "THUÊ ĐỒ" [ref=e157] [cursor=pointer]
+                - button "MUA NGAY" [ref=e158] [cursor=pointer]
+            - generic [ref=e159]:
+              - paragraph [ref=e160]: Noir Homme
+              - heading [level=3] [ref=e161]:
+                - link "Midnight Tuxedo" [ref=e162] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/products/midnight-tuxedo
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - paragraph [ref=e165]: "Thuê: 820.000đ / ngày"
+                  - paragraph [ref=e166]: "(Cọc: 2.400.000đ — Hoàn sau khi trả đồ)"
+                - paragraph [ref=e167]: "Mua đứt: 6.400.000đ"
+              - generic "Kích cỡ khả dụng" [ref=e168]:
+                - generic [ref=e169]: M
+                - generic [ref=e170]: L
+                - generic [ref=e171]: XL
+          - article [ref=e172]:
+            - generic [ref=e173]:
+              - link "Xem Graphite Column Dress" [ref=e174] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/products/graphite-column-dress
+                - img "Graphite Column Dress của Studio N°5" [ref=e175]
+              - generic [ref=e176]: CÓ SẴN
+              - button "Thêm Graphite Column Dress vào yêu thích" [ref=e177] [cursor=pointer]
+              - generic [ref=e180]:
+                - button "THUÊ ĐỒ" [ref=e181] [cursor=pointer]
+                - button "MUA NGAY" [ref=e182] [cursor=pointer]
+            - generic [ref=e183]:
+              - paragraph [ref=e184]: Studio N°5
+              - heading [level=3] [ref=e185]:
+                - link "Graphite Column Dress" [ref=e186] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/products/graphite-column-dress
+              - generic [ref=e187]:
+                - generic [ref=e188]:
+                  - paragraph [ref=e189]: "Thuê: 690.000đ / ngày"
+                  - paragraph [ref=e190]: "(Cọc: 1.900.000đ — Hoàn sau khi trả đồ)"
+                - paragraph [ref=e191]: "Mua đứt: 5.200.000đ"
+              - generic "Kích cỡ khả dụng" [ref=e192]:
+                - generic [ref=e193]: XS
+                - generic [ref=e194]: S
+    - region [ref=e195]:
+      - generic [ref=e197]:
+        - paragraph [ref=e198]: Styling intelligence
+        - heading "Đừng đoán. Hãy thử trước." [level=2] [ref=e199]: Đừng đoán.Hãy thử trước.
+        - paragraph [ref=e200]: Kể cho AI Stylist về dịp, phong cách và ngân sách. Nhận đề xuất phối đồ, kiểm tra size theo số đo và thử trực quan trước khi giữ lịch.
+        - link "Bắt đầu tư vấn" [ref=e201] [cursor=pointer]:
+          - /url: "#ai-stylist"
+      - generic [ref=e202]:
+        - article [ref=e203]:
+          - generic [ref=e204]:
+            - generic [ref=e205]: "01"
+            - generic [ref=e206]:
+              - heading "AI Stylist" [level=3] [ref=e207]
+              - paragraph [ref=e208]: Đề xuất diện mạo theo sự kiện, phong cách và ngân sách của bạn.
+        - article [ref=e209]:
+          - generic [ref=e210]:
+            - generic [ref=e211]: "02"
+            - generic [ref=e212]:
+              - heading "Size Advisor" [level=3] [ref=e213]
+              - paragraph [ref=e214]: Đối chiếu số đo cơ thể với form thực tế của từng thiết kế.
+        - article [ref=e215]:
+          - generic [ref=e216]:
+            - generic [ref=e217]: "03"
+            - generic [ref=e218]:
+              - heading "Virtual Try-on" [level=3] [ref=e219]
+              - paragraph [ref=e220]: Hình dung tổng thể trang phục trên ảnh của bạn trước khi đặt.
+    - region [ref=e221]:
+      - generic [ref=e222]:
+        - paragraph [ref=e223]: Quy trình thuê
+        - heading "Bốn bước, mọi khoản phí đều rõ ràng" [level=2] [ref=e224]
+      - list [ref=e225]:
+        - listitem [ref=e226]:
+          - text: "01"
+          - heading "Chọn thiết kế" [level=3] [ref=e227]
+          - paragraph [ref=e228]: Lọc theo dịp, size, ngày mặc và ngân sách. Chỉ những món còn lịch mới được hiển thị.
+        - listitem [ref=e229]:
+          - text: "02"
+          - heading "Giữ lịch & cọc" [level=3] [ref=e230]
+          - paragraph [ref=e231]: Thanh toán tiền thuê; tiền cọc được tạm giữ riêng và hiển thị rõ trong hóa đơn.
+        - listitem [ref=e232]:
+          - text: "03"
+          - heading "Nhận & trải nghiệm" [level=3] [ref=e233]
+          - paragraph [ref=e234]: Trang phục đã giặt hấp được giao trước sự kiện, kèm hướng dẫn bảo quản.
+        - listitem [ref=e235]:
+          - text: "04"
+          - heading "Trả & hoàn cọc" [level=3] [ref=e236]
+          - paragraph [ref=e237]: Đồ được kiểm định khi hoàn về. Cọc tự động hoàn nếu không có phát sinh.
+    - region [ref=e238]:
+      - generic [ref=e239]:
+        - figure [ref=e240]:
+          - img "Hai khách hàng mặc suit trắng và váy xám trong bộ ảnh lookbook thành thị" [ref=e241]
+        - generic [ref=e243]:
+          - paragraph [ref=e244]: Community lookbook · 08/2026
+          - heading "Trang phục có một đời sống sau tủ đồ." [level=2] [ref=e245]
+          - paragraph [ref=e246]: Xem cách cộng đồng mặc lại những thiết kế quen thuộc theo cá tính riêng. Lưu cảm hứng, gắn thẻ sản phẩm và chia sẻ diện mạo của bạn.
+          - link "Khám phá Lookbook" [ref=e247] [cursor=pointer]:
+            - /url: "#lookbook-community"
+    - region [ref=e248]:
+      - generic [ref=e249]:
+        - generic [ref=e250]:
+          - paragraph [ref=e251]: Dành cho đối tác
+          - heading "Thiết kế đang nằm yên có thể bắt đầu một vòng đời mới." [level=2] [ref=e252]
+        - generic [ref=e253]:
+          - paragraph [ref=e254]: Quản lý từng SKU vật lý, lịch thuê, giặt hấp, kiểm định và doanh thu trong một workspace thống nhất.
+          - link "Mở gian hàng" [ref=e255] [cursor=pointer]:
+            - /url: "#mo-gian-hang"
+  - contentinfo [ref=e256]:
+    - generic [ref=e257]:
+      - generic [ref=e258]:
+        - generic [ref=e259]:
+          - paragraph [ref=e260]: LUXE/ROTATE
+          - paragraph [ref=e261]: "Tủ đồ cao cấp được vận hành theo vòng đời: chọn, mặc, trả và tiếp tục lưu chuyển."
+        - navigation "Khám phá" [ref=e262]:
+          - heading "Khám phá" [level=2] [ref=e263]
+          - list [ref=e264]:
+            - listitem [ref=e265]:
+              - link "Bộ sưu tập" [ref=e266] [cursor=pointer]:
+                - /url: "#bo-suu-tap"
+            - listitem [ref=e267]:
+              - link "AI Stylist" [ref=e268] [cursor=pointer]:
+                - /url: "#cong-nghe"
+            - listitem [ref=e269]:
+              - link "Lookbook" [ref=e270] [cursor=pointer]:
+                - /url: "#lookbook"
+        - navigation "Hỗ trợ" [ref=e271]:
+          - heading "Hỗ trợ" [level=2] [ref=e272]
+          - list [ref=e273]:
+            - listitem [ref=e274]:
+              - link "Cách hoạt động" [ref=e275] [cursor=pointer]:
+                - /url: "#cach-hoat-dong"
+            - listitem [ref=e276]:
+              - link "Chính sách tiền cọc" [ref=e277] [cursor=pointer]:
+                - /url: "#tien-coc"
+            - listitem [ref=e278]:
+              - link "Giao nhận & đổi trả" [ref=e279] [cursor=pointer]:
+                - /url: "#giao-nhan"
+        - generic [ref=e280]:
+          - heading "Liên hệ" [level=2] [ref=e281]
+          - generic [ref=e282]:
+            - paragraph [ref=e283]: TP. Hồ Chí Minh, Việt Nam
+            - paragraph [ref=e284]:
+              - link "1900 1234" [ref=e285] [cursor=pointer]:
+                - /url: tel:19001234
+            - paragraph [ref=e286]:
+              - link "hello@luxerotate.vn" [ref=e287] [cursor=pointer]:
+                - /url: mailto:hello@luxerotate.vn
+      - generic [ref=e288]:
+        - paragraph [ref=e289]: © 2026 LUXE ROTATE. Thời trang tuần hoàn.
+        - paragraph [ref=e290]: Tiền cọc được tạm giữ và hoàn sau kiểm định.
