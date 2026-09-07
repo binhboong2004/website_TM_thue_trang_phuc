@@ -184,3 +184,28 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - After the feature tests pass, ask the user to run the complete suite with `php artisan test --compact`.
 
 </laravel-boost-guidelines>
+
+
+=== custom project rules ===
+
+# STRICT WORKFLOW & UX/UI RULES (CRITICAL)
+
+The following rules MUST override any default behavior when generating code or building features for this specific project.
+
+## 1. THE WATERFALL EXECUTION (NO SKIPPING STEPS)
+You are strictly forbidden from writing "Full-stack" solutions in a single response unless explicitly asked. You must build features in this exact order:
+- **PHASE 1: DATABASE FIRST.** Always ensure Migrations, Schema, and Relationships (Eloquent Models) are perfect before writing any views or controllers.
+- **PHASE 2: FRONTEND ONLY.** When asked to build UI, ONLY output Blade templates, Tailwind CSS, and Alpine.js. Use HARDCODED static arrays/data. DO NOT write Controllers or Models in this phase.
+- **PHASE 3: INTEGRATION.** Only when the UI is approved, you will write the Controller logic to replace the hardcoded data with real database queries.
+- NO PLACEHOLDERS: Always write 100% complete code. Do not use `// logic here` or `<!-- content -->`.
+
+## 2. LUXURY MONOCHROME AESTHETIC (ANTI-AI DESIGN)
+This is a High-end Fashion E-commerce & Rental platform. The UI must look like SSENSE, Farfetch, or Saint Laurent.
+- **Colors:** Strictly Monochrome. Pure White (#FFFFFF), Light Gray (#F5F5F5), and Jet Black (#000000 or #0A0A0A). NO gradients, NO neon colors. 
+- **Shapes:** Sharp edges (`rounded-none`) or extremely subtle rounding (`rounded-sm`). DO NOT use heavy box-shadows; use hairline borders (`border border-neutral-200`) for separation.
+- **Typography:** Use elegant Serif fonts for Headings (Playfair Display) and clean Sans-serif for UI elements (Inter). Use generous white-space (padding/margin) and wide tracking (`tracking-widest`) for uppercase small labels.
+
+## 3. DOMAIN-SPECIFIC LOGIC
+- **Hybrid E-commerce:** The system supports both "Rentals" (Thuê) and "Outright Purchases" (Mua đứt).
+- **Smart Scheduling:** Rental availability is checked against SPECIFIC physical items (`garment_items` table), NOT the general product template.
+- **Escrow Deposits:** Rental orders always require a refundable security deposit mechanism.

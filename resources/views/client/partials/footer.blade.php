@@ -8,7 +8,7 @@
             <nav aria-label="Khám phá">
                 <h2 class="eyebrow">Khám phá</h2>
                 <ul class="mt-5 space-y-3 text-sm text-muted">
-                    <li><a class="hover:text-ink" href="#bo-suu-tap">Bộ sưu tập</a></li><li><a class="hover:text-ink" href="#cong-nghe">AI Stylist</a></li><li><a class="hover:text-ink" href="#lookbook">Lookbook</a></li>
+                    <li><a class="hover:text-ink" href="#bo-suu-tap">Bộ sưu tập</a></li><li><button type="button" class="hover:text-ink" @click="$dispatch('ai-stylist-open')">AI Stylist</button></li><li><a class="hover:text-ink" href="#lookbook">Lookbook</a></li>
                 </ul>
             </nav>
             <nav aria-label="Hỗ trợ">

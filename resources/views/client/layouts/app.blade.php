@@ -88,7 +88,11 @@
         @yield('content')
     </main>
 
-    @include('client.partials.footer')
+    @unless ($__env->hasSection('hideFooter'))
+        @include('client.partials.footer')
+    @endunless
     @stack('scripts')
+    <x-client::ai-stylist-widget />
+    <x-client::toast />
 </body>
 </html>

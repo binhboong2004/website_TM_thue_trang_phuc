@@ -1,32 +1,61 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Client\Auth\RegisteredUserController;
+use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\LookbookController;
+use App\Http\Controllers\Client\ProductController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\RentalOrderController;
+use App\Http\Controllers\Client\VirtualFittingController;
 use App\Http\Controllers\Shop\DashboardController as ShopDashboardController;
+use App\Http\Controllers\Shop\InventoryController as ShopInventoryController;
 use App\Http\Controllers\Shop\OrderController as ShopOrderController;
 use App\Http\Controllers\Shop\ProductController as ShopProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::view('/shop', 'client.pages.shop.index')->name('shop.index');
+Route::middleware('guest')->group(function (): void {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+        ->middleware('throttle:6,1');
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+});
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
+Route::get('/shop', [CatalogController::class, 'index'])->name('client.shop');
 Route::view('/collections/{category}', 'client.pages.collections.show')
     ->where('category', '[a-z0-9]+(?:-[a-z0-9]+)*')
     ->name('collections.show');
-Route::view('/products/{slug}', 'client.pages.products.show')
+Route::get('/products/{slug}', [ProductController::class, 'show'])
     ->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')
     ->name('products.show');
 Route::view('/search', 'client.pages.search')->name('search');
 
-Route::view('/brands', 'client.pages.brands.index')->name('brands.index');
+Route::view('/brands', 'client.pages.brands.index')->name('client.brands');
 Route::view('/brands/{brand}', 'client.pages.brands.show')
     ->where('brand', '[a-z0-9]+(?:-[a-z0-9]+)*')
-    ->name('brands.show');
-Route::view('/lookbook', 'client.pages.lookbook.index')->name('lookbook.index');
-Route::view('/ai-stylist', 'client.pages.ai-stylist')->name('ai-stylist');
+    ->name('client.brands.show');
+Route::get('/lookbook', [LookbookController::class, 'index'])->name('client.lookbook');
+Route::get('/virtual-fitting', [VirtualFittingController::class, 'index'])->name('client.virtual-fitting');
+Route::redirect('/ai-stylist', '/virtual-fitting', 301)->name('client.ai-stylist');
+
+Route::middleware('auth')
+    ->prefix('account')
+    ->group(function (): void {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    });
 
 Route::view('/checkout', 'client.pages.checkout')->name('checkout');
-Route::view('/account/rentals/{order_code}', 'client.pages.account.rentals.show')
+Route::get('/account/rentals/{order_code}', [RentalOrderController::class, 'show'])
     ->where('order_code', '[A-Za-z0-9-]+')
     ->name('account.rentals.show');
 
@@ -35,6 +64,7 @@ Route::prefix('shop')
     ->middleware(['auth', 'verified', 'is_shop'])
     ->group(function (): void {
         Route::get('/dashboard', [ShopDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/inventory', [ShopInventoryController::class, 'index'])->name('inventory.index');
 
         Route::get('/products', [ShopProductController::class, 'index'])->name('products.index');
         Route::get('/products/create', [ShopProductController::class, 'create'])->name('products.create');

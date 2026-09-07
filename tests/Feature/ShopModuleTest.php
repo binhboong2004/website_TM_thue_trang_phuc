@@ -69,7 +69,7 @@ class ShopModuleTest extends TestCase
 
     public function test_public_catalog_and_seller_dashboard_have_distinct_urls(): void
     {
-        $this->assertSame(url('/shop'), route('shop.index'));
+        $this->assertSame(url('/shop'), route('client.shop'));
         $this->assertSame(url('/shop/dashboard'), route('shop.dashboard'));
     }
 }

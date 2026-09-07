@@ -28,7 +28,13 @@
                     <li>
                         <a href="{{ route('shop.products.index') }}" class="flex min-h-12 items-center gap-3 border-l-2 px-3 text-sm font-medium {{ request()->routeIs('shop.products.*') ? 'border-ink bg-fog text-ink' : 'border-transparent text-muted hover:bg-fog hover:text-ink' }}">
                             <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" /><path d="m4 7.5 8 4.5 8-4.5M12 12v9" /></svg>
-                            Sản phẩm
+                            Mẫu thiết kế
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop.inventory.index') }}" class="flex min-h-12 items-center gap-3 border-l-2 px-3 text-sm font-medium {{ request()->routeIs('shop.inventory.*') ? 'border-ink bg-fog text-ink' : 'border-transparent text-muted hover:bg-fog hover:text-ink' }}">
+                            <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h16v12H4V8Z" /><path d="M7 4h10v4H7V4Zm2 8v4m3-4v4m3-4v4" /></svg>
+                            Kho món đồ
                         </a>
                     </li>
                     <li>
@@ -41,11 +47,11 @@
             </nav>
 
             <div class="mt-8 border-t border-line pt-5">
-                <a href="{{ route('shop.products.create') }}" class="button-primary w-full">Thêm sản phẩm</a>
+                <a href="{{ route('shop.products.create') }}" class="button-primary w-full">Thêm mẫu thiết kế</a>
             </div>
 
             <div class="mt-auto border-t border-line pt-5">
-                <a href="{{ route('shop.index') }}" class="flex min-h-12 items-center gap-3 px-3 text-sm text-muted hover:bg-fog hover:text-ink">
+                <a href="{{ route('client.shop') }}" class="flex min-h-12 items-center gap-3 px-3 text-sm text-muted hover:bg-fog hover:text-ink">
                     <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 5h5v5M19 5l-8 8" /><path d="M19 13v6H5V5h6" /></svg>
                     Xem catalog công khai
                 </a>

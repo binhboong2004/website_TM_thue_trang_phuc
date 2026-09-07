@@ -15,7 +15,7 @@
                     <p class="mt-7 max-w-lg text-[15px] leading-7 text-muted sm:text-base">Thuê thiết kế cao cấp từ những gian hàng đã kiểm duyệt. Lịch trống cập nhật theo thời gian thực, tư vấn phong cách bằng AI và tiền cọc được bảo vệ đến khi hoàn tất kiểm định.</p>
                     <div class="mt-9 flex flex-col gap-3 sm:flex-row">
                         <a href="#bo-suu-tap" class="button-primary">Khám phá bộ sưu tập</a>
-                        <a href="#cong-nghe" class="button-secondary">Hỏi AI Stylist</a>
+                        <button type="button" class="button-secondary" @click="$dispatch('ai-stylist-open')">Hỏi AI Stylist</button>
                     </div>
                     <dl class="mt-12 grid grid-cols-3 gap-5 border-t border-line pt-6">
                         <div><dt class="font-display text-2xl sm:text-3xl">500+</dt><dd class="mt-1 text-[9px] uppercase tracking-[0.13em] text-muted sm:text-[10px]">Thiết kế</dd></div>
@@ -135,7 +135,7 @@
 
     <section id="cong-nghe" class="grid bg-ink text-paper lg:grid-cols-2" aria-labelledby="technology-title">
         <div class="flex items-center px-6 py-20 sm:px-10 lg:px-[max(2.5rem,calc((100vw-90rem)/2))] lg:py-28 lg:pr-16" data-reveal>
-            <div class="max-w-xl"><p class="eyebrow text-paper/55">Styling intelligence</p><h2 id="technology-title" class="mt-5 font-display text-5xl leading-[0.98] sm:text-6xl">Đừng đoán.<br><span class="italic">Hãy thử trước.</span></h2><p class="mt-7 max-w-lg text-sm leading-7 text-paper/65">Kể cho AI Stylist về dịp, phong cách và ngân sách. Nhận đề xuất phối đồ, kiểm tra size theo số đo và thử trực quan trước khi giữ lịch.</p><a href="#ai-stylist" class="button-light mt-9">Bắt đầu tư vấn</a></div>
+            <div class="max-w-xl"><p class="eyebrow text-paper/55">Styling intelligence</p><h2 id="technology-title" class="mt-5 font-display text-5xl leading-[0.98] sm:text-6xl">Đừng đoán.<br><span class="italic">Hãy thử trước.</span></h2><p class="mt-7 max-w-lg text-sm leading-7 text-paper/65">Kể cho AI Stylist về dịp, phong cách và ngân sách. Nhận đề xuất phối đồ, kiểm tra size theo số đo và thử trực quan trước khi giữ lịch.</p><button type="button" class="button-light mt-9" @click="$dispatch('ai-stylist-open')">Bắt đầu tư vấn</button></div>
         </div>
         <div class="grid border-t border-paper/15 sm:grid-cols-3 lg:border-l lg:border-t-0 lg:grid-cols-1">
             @foreach ([['01', 'AI Stylist', 'Đề xuất diện mạo theo sự kiện, phong cách và ngân sách của bạn.'], ['02', 'Size Advisor', 'Đối chiếu số đo cơ thể với form thực tế của từng thiết kế.'], ['03', 'Virtual Try-on', 'Hình dung tổng thể trang phục trên ảnh của bạn trước khi đặt.']] as [$number, $title, $copy])

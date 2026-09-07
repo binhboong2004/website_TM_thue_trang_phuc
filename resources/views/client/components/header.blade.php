@@ -2,10 +2,12 @@
     $megaMenus = [
         'rent' => [
             'label' => 'Thuê',
+            'url' => route('client.shop', ['type' => 'rent']),
+            'is_active' => request()->routeIs('client.shop') && (request('type') === 'rent' || request('transaction') === 'rental'),
             'eyebrow' => 'Rental edit',
             'headline' => 'Thuê cho khoảnh khắc đáng nhớ',
             'description' => 'Chọn ngày mặc, giữ lịch và bảo vệ tiền cọc trong một quy trình minh bạch.',
-            'cta' => ['label' => 'Xem toàn bộ đồ thuê', 'url' => route('shop.index', ['purpose' => 'rental'])],
+            'cta' => ['label' => 'Xem toàn bộ đồ thuê', 'url' => route('client.shop', ['type' => 'rent'])],
             'columns' => [
                 ['title' => 'Theo dịp', 'links' => [
                     ['label' => 'Tiệc cưới', 'url' => route('collections.show', 'tiec-cuoi')],
@@ -23,10 +25,12 @@
         ],
         'buy' => [
             'label' => 'Mua',
+            'url' => route('client.shop', ['type' => 'buy']),
+            'is_active' => request()->routeIs('client.shop') && (request('type') === 'buy' || request('transaction') === 'purchase'),
             'eyebrow' => 'Permanent wardrobe',
             'headline' => 'Những thiết kế để sở hữu lâu dài',
             'description' => 'Mua đứt sản phẩm chính hãng từ các gian hàng và atelier đã được kiểm duyệt.',
-            'cta' => ['label' => 'Mua sắm tất cả', 'url' => route('shop.index', ['purpose' => 'purchase'])],
+            'cta' => ['label' => 'Mua sắm tất cả', 'url' => route('client.shop', ['type' => 'buy'])],
             'columns' => [
                 ['title' => 'Nữ', 'links' => [
                     ['label' => 'Đầm & váy', 'url' => route('collections.show', 'dam-vay')],
@@ -44,29 +48,31 @@
         ],
         'brands' => [
             'label' => 'Thương hiệu',
+            'url' => route('client.brands'),
+            'is_active' => request()->routeIs('client.brands*'),
             'eyebrow' => 'Designer index',
             'headline' => 'Nhà mốt quốc tế & thiết kế Việt',
             'description' => 'Khám phá tuyển chọn từ Saint Laurent, Dior đến những atelier Việt Nam đương đại.',
-            'cta' => ['label' => 'Danh mục thương hiệu', 'url' => route('brands.index')],
+            'cta' => ['label' => 'Danh mục thương hiệu', 'url' => route('client.brands')],
             'columns' => [
                 ['title' => 'Quốc tế', 'links' => [
-                    ['label' => 'Saint Laurent', 'url' => route('brands.show', 'saint-laurent')],
-                    ['label' => 'Dior', 'url' => route('brands.show', 'dior')],
-                    ['label' => 'Prada', 'url' => route('brands.show', 'prada')],
-                    ['label' => 'Alexander McQueen', 'url' => route('brands.show', 'alexander-mcqueen')],
+                    ['label' => 'Saint Laurent', 'url' => route('client.brands.show', 'saint-laurent')],
+                    ['label' => 'Dior', 'url' => route('client.brands.show', 'dior')],
+                    ['label' => 'Prada', 'url' => route('client.brands.show', 'prada')],
+                    ['label' => 'Alexander McQueen', 'url' => route('client.brands.show', 'alexander-mcqueen')],
                 ]],
                 ['title' => 'Việt Nam', 'links' => [
-                    ['label' => 'Công Trí', 'url' => route('brands.show', 'cong-tri')],
-                    ['label' => 'Lâm Gia Khang', 'url' => route('brands.show', 'lam-gia-khang')],
-                    ['label' => 'Đỗ Mạnh Cường', 'url' => route('brands.show', 'do-manh-cuong')],
-                    ['label' => 'Tất cả nhà thiết kế', 'url' => route('brands.index')],
+                    ['label' => 'Công Trí', 'url' => route('client.brands.show', 'cong-tri')],
+                    ['label' => 'Lâm Gia Khang', 'url' => route('client.brands.show', 'lam-gia-khang')],
+                    ['label' => 'Đỗ Mạnh Cường', 'url' => route('client.brands.show', 'do-manh-cuong')],
+                    ['label' => 'Tất cả nhà thiết kế', 'url' => route('client.brands')],
                 ]],
             ],
         ],
     ];
 @endphp
 
-<div x-data="siteHeader" @keydown.escape.window="closeMegaMenu(); closeSearch(); mobileMenuOpen = false">
+<div x-data="siteHeader" class="contents" @keydown.escape.window="closeMegaMenu(); closeSearch(); mobileMenuOpen = false">
     <div class="announcement-bar" aria-label="Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫. Di chuột hoặc đặt tiêu điểm để tạm dừng." tabindex="0">
         <span class="sr-only">Miễn phí giao nhận nội thành cho đơn thuê từ 1.500.000₫</span>
         <div class="announcement-track" aria-hidden="true">
@@ -83,7 +89,7 @@
         </div>
     </div>
 
-    <header class="sticky top-0 z-50 border-b border-line bg-paper" @click.outside="closeMegaMenu(); closeSearch()">
+    <header class="sticky top-0 z-50 w-full bg-white border-b border-neutral-100 transition-all duration-300" @click.outside="closeMegaMenu(); closeSearch()" @mouseleave="closeMegaMenu()">
         <div class="shell grid h-[4.5rem] grid-cols-[2.75rem_1fr_auto] items-center gap-2 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
             <button
                 type="button"
@@ -104,35 +110,203 @@
                 <ul class="flex items-center gap-7 text-xs font-semibold uppercase tracking-[0.14em] xl:gap-9 xl:text-[13px]">
                     @foreach ($megaMenus as $menuKey => $menu)
                         <li>
-                            <button
-                                type="button"
-                                class="nav-underline flex min-h-11 items-center gap-1.5 py-4"
-                                :class="activeMegaMenu === '{{ $menuKey }}' ? 'is-active' : ''"
+                            <a
+                                href="{{ $menu['url'] }}"
+                                class="nav-underline flex min-h-11 items-center gap-1.5 py-4 {{ $menu['is_active'] ? 'is-active' : '' }}"
                                 aria-controls="mega-menu-{{ $menuKey }}"
+                                aria-haspopup="true"
                                 :aria-expanded="activeMegaMenu === '{{ $menuKey }}'"
-                                @click="toggleMegaMenu('{{ $menuKey }}')"
+                                @mouseenter="activeMegaMenu = '{{ $menuKey }}'"
+                                @focus="activeMegaMenu = '{{ $menuKey }}'"
+                                @keydown.arrow-down.prevent="activeMegaMenu = '{{ $menuKey }}'"
                             >
                                 {{ $menu['label'] }}
-                                <svg aria-hidden="true" class="size-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3 3 3-3" /></svg>
-                            </button>
+                                <svg aria-hidden="true" class="size-3 transition-transform duration-200 motion-reduce:transition-none" :class="activeMegaMenu === '{{ $menuKey }}' && 'rotate-180'" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3 3 3-3" /></svg>
+                            </a>
                         </li>
                     @endforeach
-                    <li><a class="nav-underline flex min-h-11 items-center py-4 {{ request()->routeIs('lookbook.*') ? 'is-active' : '' }}" href="{{ route('lookbook.index') }}">Lookbook</a></li>
-                    <li><a class="nav-underline flex min-h-11 items-center py-4 {{ request()->routeIs('ai-stylist') ? 'is-active' : '' }}" href="{{ route('ai-stylist') }}">AI Stylist</a></li>
+                    <li><a class="nav-underline flex min-h-11 items-center py-4 {{ request()->routeIs('client.lookbook') ? 'is-active' : '' }}" href="{{ route('client.lookbook') }}">Lookbook</a></li>
+                    <li><a class="nav-underline flex min-h-11 items-center py-4 {{ request()->routeIs('client.virtual-fitting') ? 'is-active' : '' }}" href="{{ route('client.virtual-fitting') }}">Thử đồ ảo</a></li>
                 </ul>
             </nav>
 
             <div class="flex items-center justify-self-end">
-                <button type="button" class="flex size-11 items-center justify-center" aria-label="Mở tìm kiếm" :aria-expanded="searchOpen" aria-controls="header-search" @click="searchOpen ? closeSearch() : openSearch()">
-                    <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
+                <button
+                    type="button"
+                    class="flex size-11 items-center justify-center"
+                    aria-label="Mở tìm kiếm"
+                    :aria-expanded="searchOpen"
+                    aria-controls="header-search"
+                    @click="searchOpen ? closeSearch() : openSearch()"
+                >
+                    <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="6.5" />
+                        <path d="m16 16 4.5 4.5" />
+                    </svg>
                 </button>
-                <button type="button" class="hidden size-11 items-center justify-center sm:flex" aria-label="Đăng nhập hoặc mở tài khoản" @click="$dispatch('auth-modal-open')">
-                    <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4" /><path d="M4.5 21a7.5 7.5 0 0 1 15 0" /></svg>
-                </button>
-                <button type="button" class="relative flex size-11 items-center justify-end sm:justify-center" aria-label="Mở giỏ hàng" @click="$dispatch('cart-drawer-open')">
-                    <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1 13H6L5 8Z" /><path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg>
+
+                @guest
+                    <div
+                        x-data="{ userMenuOpen: false }"
+                        class="relative flex h-full items-center"
+                        @mouseenter="userMenuOpen = true"
+                        @mouseleave="userMenuOpen = false"
+                        @focusin="userMenuOpen = true"
+                        @focusout="if (!$el.contains($event.relatedTarget)) userMenuOpen = false"
+                        @click.outside="userMenuOpen = false"
+                        @keydown.escape.stop="userMenuOpen = false; $refs.userMenuTrigger.focus()"
+                    >
+                        <button
+                            x-ref="userMenuTrigger"
+                            type="button"
+                            class="flex size-11 cursor-pointer items-center justify-center text-black transition-colors duration-200 hover:text-neutral-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black motion-reduce:transition-none"
+                            aria-label="Mở menu đăng nhập và đăng ký"
+                            aria-haspopup="menu"
+                            aria-controls="user-account-menu"
+                            :aria-expanded="userMenuOpen"
+                            @click="userMenuOpen = !userMenuOpen"
+                            @keydown.arrow-down.prevent="userMenuOpen = true; $nextTick(() => $refs.firstUserMenuItem.focus())"
+                        >
+                            <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+                                <circle cx="12" cy="8" r="4" />
+                                <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
+                            </svg>
+                        </button>
+
+                        <div
+                            x-show="userMenuOpen"
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-200 motion-reduce:transition-none"
+                            x-transition:enter-start="translate-y-2 opacity-0"
+                            x-transition:enter-end="translate-y-0 opacity-100"
+                            x-transition:leave="transition ease-in duration-150 motion-reduce:transition-none"
+                            x-transition:leave-start="translate-y-0 opacity-100"
+                            x-transition:leave-end="translate-y-2 opacity-0"
+                            class="absolute top-full right-0 z-50 mt-2"
+                        >
+                            <div class="pt-4">
+                                <div id="user-account-menu" class="w-36 rounded-none border border-neutral-200 bg-white shadow-xl" role="menu" aria-label="Menu tài khoản">
+                                    <a
+                                        x-ref="firstUserMenuItem"
+                                        href="{{ route('login') }}"
+                                        class="block px-4 py-3 text-[10px] font-medium tracking-widest uppercase text-neutral-600 decoration-1 transition-all duration-200 hover:text-black hover:underline hover:underline-offset-4 focus-visible:text-black focus-visible:underline focus-visible:underline-offset-4 focus-visible:outline-none"
+                                        role="menuitem"
+                                    >
+                                        Đăng nhập
+                                    </a>
+                                    <a
+                                        href="{{ route('register') }}"
+                                        class="block border-t border-neutral-100 px-4 py-3 text-[10px] font-medium tracking-widest uppercase text-neutral-600 decoration-1 transition-all duration-200 hover:text-black hover:underline hover:underline-offset-4 focus-visible:text-black focus-visible:underline focus-visible:underline-offset-4 focus-visible:outline-none"
+                                        role="menuitem"
+                                    >
+                                        Đăng ký
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endguest
+
+                @auth
+                    @php
+                        $user = Auth::user();
+                    @endphp
+
+                    <div
+                        x-data="{ userMenuOpen: false }"
+                        class="relative flex h-full items-center"
+                        @mouseenter="userMenuOpen = true"
+                        @mouseleave="userMenuOpen = false"
+                        @focusin="userMenuOpen = true"
+                        @focusout="if (!$el.contains($event.relatedTarget)) userMenuOpen = false"
+                        @click.outside="userMenuOpen = false"
+                        @keydown.escape.stop="userMenuOpen = false; $refs.userMenuTrigger.focus()"
+                    >
+                        <button
+                            x-ref="userMenuTrigger"
+                            type="button"
+                            class="flex min-h-11 cursor-pointer items-center text-black transition-colors duration-200 hover:text-neutral-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black motion-reduce:transition-none"
+                            aria-label="Mở menu tài khoản của {{ $user->name }}"
+                            aria-haspopup="menu"
+                            aria-controls="user-account-menu"
+                            :aria-expanded="userMenuOpen"
+                            @click="userMenuOpen = !userMenuOpen"
+                            @keydown.arrow-down.prevent="userMenuOpen = true; $nextTick(() => $refs.firstUserMenuItem.focus())"
+                        >
+                            <img
+                                src="{{ $user->avatar_url }}"
+                                alt=""
+                                width="28"
+                                height="28"
+                                class="h-7 w-7 shrink-0 rounded-full border border-neutral-200 object-cover"
+                            >
+                            <span class="ml-2 max-w-24 truncate text-[10px] font-medium uppercase tracking-widest text-neutral-800 sm:max-w-32" title="{{ $user->name }}">
+                                {{ $user->name }}
+                            </span>
+                        </button>
+
+                        <div
+                            x-show="userMenuOpen"
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-200 motion-reduce:transition-none"
+                            x-transition:enter-start="translate-y-2 opacity-0"
+                            x-transition:enter-end="translate-y-0 opacity-100"
+                            x-transition:leave="transition ease-in duration-150 motion-reduce:transition-none"
+                            x-transition:leave-start="translate-y-0 opacity-100"
+                            x-transition:leave-end="translate-y-2 opacity-0"
+                            class="absolute top-full right-0 z-50 mt-2"
+                        >
+                            <div class="pt-4">
+                                <div id="user-account-menu" class="w-48 rounded-none border border-neutral-200 bg-white shadow-xl" role="menu" aria-label="Menu tài khoản">
+                                    <a
+                                        x-ref="firstUserMenuItem"
+                                        href="{{ Route::has('profile.edit') ? route('profile.edit') : url('/account/profile') }}"
+                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        role="menuitem"
+                                    >
+                                        Hồ sơ của tôi
+                                    </a>
+                                    <a
+                                        href="{{ route('account.rentals.show', 'LR-2026-0001') }}#escrow-title"
+                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        role="menuitem"
+                                    >
+                                        Đơn thuê & Cọc
+                                    </a>
+                                    <a
+                                        href="mailto:lookbook@luxerotate.vn?subject={{ rawurlencode('Chia sẻ phong cách cùng LUXE ROTATE') }}"
+                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        role="menuitem"
+                                    >
+                                        Đăng Lookbook
+                                    </a>
+                                    <form method="POST" action="{{ route('logout') }}" class="border-t border-neutral-100">
+                                        @csrf
+                                        <button
+                                            type="submit"
+                                            class="block w-full cursor-pointer px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                            role="menuitem"
+                                        >
+                                            Đăng xuất
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endauth
+                <button
+                    type="button"
+                    class="relative flex size-11 items-center justify-end sm:justify-center"
+                    aria-label="Mở giỏ hàng"
+                    @click="$dispatch('cart-drawer-open')"
+                >
+                    <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 8h14l-1 13H6L5 8Z" />
+                        <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+                    </svg>
                     <span x-show="$store.cart.itemCount > 0" x-cloak class="absolute right-0.5 top-1 flex size-4 items-center justify-center bg-ink text-[8px] font-semibold text-paper" x-text="$store.cart.itemCount"></span>
-                    <span class="sr-only" role="status" aria-atomic="true" x-text="`${$store.cart.itemCount} sản phẩm trong giỏ`"></span>
+                    <span class="sr-only" role="status" aria-atomic="true" x-text="$store.cart.itemCount + ' sản phẩm trong giỏ'"></span>
                 </button>
             </div>
         </div>
@@ -247,16 +421,23 @@
 
             <nav class="flex-1 py-8" aria-label="Điều hướng di động">
                 <ul class="divide-y divide-line font-display text-[clamp(2rem,9vw,3.25rem)] leading-none">
-                    <li><a href="{{ route('shop.index', ['purpose' => 'rental']) }}" class="flex min-h-20 items-center justify-between py-4" @click="mobileMenuOpen = false"><span>Thuê</span><span class="font-sans text-xs uppercase tracking-[0.14em] text-muted">Theo lịch</span></a></li>
-                    <li><a href="{{ route('shop.index', ['purpose' => 'purchase']) }}" class="flex min-h-20 items-center justify-between py-4" @click="mobileMenuOpen = false"><span>Mua</span><span class="font-sans text-xs uppercase tracking-[0.14em] text-muted">Sở hữu</span></a></li>
-                    <li><a href="{{ route('brands.index') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">Thương hiệu</a></li>
-                    <li><a href="{{ route('lookbook.index') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">Lookbook</a></li>
-                    <li><a href="{{ route('ai-stylist') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">AI Stylist</a></li>
+                    <li><a href="{{ route('client.shop', ['type' => 'rent']) }}" class="flex min-h-20 items-center justify-between py-4" @click="mobileMenuOpen = false"><span>Thuê</span><span class="font-sans text-xs uppercase tracking-[0.14em] text-muted">Theo lịch</span></a></li>
+                    <li><a href="{{ route('client.shop', ['type' => 'buy']) }}" class="flex min-h-20 items-center justify-between py-4" @click="mobileMenuOpen = false"><span>Mua</span><span class="font-sans text-xs uppercase tracking-[0.14em] text-muted">Sở hữu</span></a></li>
+                    <li><a href="{{ route('client.brands') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">Thương hiệu</a></li>
+                    <li><a href="{{ route('client.lookbook') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">Lookbook</a></li>
+                    <li><a href="{{ route('client.virtual-fitting') }}" class="flex min-h-20 items-center py-4" @click="mobileMenuOpen = false">Thử đồ ảo</a></li>
                 </ul>
             </nav>
 
             <div class="grid grid-cols-2 gap-px border-y border-line bg-line text-[10px] font-semibold uppercase tracking-[0.14em]">
-                <button type="button" class="flex min-h-14 items-center bg-paper" @click="mobileMenuOpen = false; $dispatch('auth-modal-open')">Tài khoản</button>
+                @guest
+                    <a href="{{ route('login') }}" class="flex min-h-14 items-center bg-paper" @click="mobileMenuOpen = false">Đăng nhập</a>
+                @else
+                    <form method="POST" action="{{ route('logout') }}" class="flex min-h-14 items-center bg-paper">
+                        @csrf
+                        <button type="submit" class="flex min-h-14 w-full items-center">Đăng xuất</button>
+                    </form>
+                @endguest
                 <button type="button" class="flex min-h-14 items-center justify-end bg-paper" @click="mobileMenuOpen = false; $dispatch('cart-drawer-open')">Giỏ hàng <span class="ml-2" x-text="`(${$store.cart.itemCount})`"></span></button>
             </div>
         </div>

@@ -36,14 +36,15 @@ class HomePageTest extends TestCase
     {
         $routeNames = [
             'home',
-            'shop.index',
+            'client.shop',
             'collections.show',
             'products.show',
             'search',
-            'brands.index',
-            'brands.show',
-            'lookbook.index',
-            'ai-stylist',
+            'client.brands',
+            'client.brands.show',
+            'client.lookbook',
+            'client.virtual-fitting',
+            'client.ai-stylist',
             'checkout',
             'account.rentals.show',
         ];

@@ -101,7 +101,7 @@
 
                 <div x-show="$store.cart.rentalItems.length === 0" class="border-b border-line py-7 text-sm text-muted">
                     <p>Chưa có thiết kế thuê trong giỏ.</p>
-                    <a href="{{ route('shop.index', ['purpose' => 'rental']) }}" class="text-link mt-2 text-ink">Chọn đồ thuê</a>
+                    <a href="{{ route('client.shop', ['purpose' => 'rental']) }}" class="text-link mt-2 text-ink">Chọn đồ thuê</a>
                 </div>
             </section>
 
@@ -147,7 +147,7 @@
 
                 <div x-show="$store.cart.purchaseItems.length === 0" class="border-b border-line py-7 text-sm text-muted">
                     <p>Chưa có sản phẩm mua đứt trong giỏ.</p>
-                    <a href="{{ route('shop.index', ['purpose' => 'purchase']) }}" class="text-link mt-2 text-ink">Khám phá sản phẩm</a>
+                    <a href="{{ route('client.shop', ['purpose' => 'purchase']) }}" class="text-link mt-2 text-ink">Khám phá sản phẩm</a>
                 </div>
             </section>
         </div>
