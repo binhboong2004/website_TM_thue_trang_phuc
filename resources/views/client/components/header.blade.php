@@ -256,35 +256,43 @@
                             x-transition:leave-end="translate-y-2 opacity-0"
                             class="absolute top-full right-0 z-50 mt-2"
                         >
-                            <div class="pt-4">
+                            <div>
                                 <div id="user-account-menu" class="w-48 rounded-none border border-neutral-200 bg-white shadow-xl" role="menu" aria-label="Menu tài khoản">
                                     <a
                                         x-ref="firstUserMenuItem"
-                                        href="{{ Route::has('profile.edit') ? route('profile.edit') : url('/account/profile') }}"
-                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        href="{{ route('profile.edit') }}"
+                                        class="block w-full text-left px-4 py-2.5 text-xs text-neutral-600 hover:text-black hover:bg-neutral-50 transition-colors"
                                         role="menuitem"
                                     >
-                                        Hồ sơ của tôi
+                                        Hồ sơ cá nhân
                                     </a>
                                     <a
-                                        href="{{ route('account.rentals.show', 'LR-2026-0001') }}#escrow-title"
-                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        href="{{ Route::has('account.orders.index') ? route('account.orders.index') : route('account.rentals.show', 'LR-2026-0001') }}"
+                                        class="block w-full text-left px-4 py-2.5 text-xs text-neutral-600 hover:text-black hover:bg-neutral-50 transition-colors"
                                         role="menuitem"
                                     >
                                         Đơn thuê & Cọc
                                     </a>
                                     <a
-                                        href="mailto:lookbook@luxerotate.vn?subject={{ rawurlencode('Chia sẻ phong cách cùng LUXE ROTATE') }}"
-                                        class="block px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                        href="{{ route('account.wishlist') }}"
+                                        class="block w-full text-left px-4 py-2.5 text-xs text-neutral-600 hover:text-black hover:bg-neutral-50 transition-colors"
                                         role="menuitem"
                                     >
-                                        Đăng Lookbook
+                                        Sản phẩm yêu thích
                                     </a>
-                                    <form method="POST" action="{{ route('logout') }}" class="border-t border-neutral-100">
+                                    <a
+                                        href="{{ route('account.password') }}"
+                                        class="block w-full text-left px-4 py-2.5 text-xs text-neutral-600 hover:text-black hover:bg-neutral-50 transition-colors"
+                                        role="menuitem"
+                                    >
+                                        Đổi mật khẩu
+                                    </a>
+                                    <div class="border-t border-neutral-100 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button
                                             type="submit"
-                                            class="block w-full cursor-pointer px-4 py-2 text-left text-xs text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-black focus-visible:bg-neutral-50 focus-visible:text-black focus-visible:outline-none"
+                                            class="block w-full text-left px-4 py-2.5 text-xs text-neutral-600 hover:text-black hover:bg-neutral-50 transition-colors"
                                             role="menuitem"
                                         >
                                             Đăng xuất

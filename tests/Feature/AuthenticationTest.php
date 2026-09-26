@@ -51,7 +51,9 @@ class AuthenticationTest extends TestCase
             'password_confirmation' => 'Luxury!2026',
         ]);
 
-        $response->assertRedirect(route('home'));
+        $response
+            ->assertRedirect(route('home'))
+            ->assertSessionHas('success', 'Tạo tài khoản thành công. Chào mừng bạn đến với LUXE ROTATE.');
         $this->assertAuthenticated();
         $this->assertDatabaseHas('users', [
             'name' => 'Linh Nguyễn',
@@ -71,7 +73,8 @@ class AuthenticationTest extends TestCase
             'email' => $user->email,
             'password' => 'Luxury!2026',
             'remember' => true,
-        ])->assertRedirect(route('home'));
+        ])->assertRedirect(route('home'))
+            ->assertSessionHas('success', 'Đăng nhập thành công. Chào mừng trở lại.');
 
         $this->assertAuthenticatedAs($user);
 

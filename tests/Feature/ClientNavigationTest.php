@@ -66,7 +66,7 @@ class ClientNavigationTest extends TestCase
             ->assertSeeText('Đăng ký');
     }
 
-    public function test_authenticated_account_dropdown_exposes_avatar_profile_and_logout_actions(): void
+    public function test_authenticated_account_dropdown_matches_account_navigation(): void
     {
         $user = User::factory()->make([
             'avatar' => 'avatars/client-avatar.jpg',
@@ -77,10 +77,15 @@ class ClientNavigationTest extends TestCase
             ->assertOk()
             ->assertSeeText($user->name)
             ->assertSee('src="'.asset('storage/avatars/client-avatar.jpg').'"', false)
-            ->assertSee('href="'.url('/account/profile').'"', false)
-            ->assertSeeText('Hồ sơ của tôi')
+            ->assertSee('href="'.route('profile.edit').'"', false)
+            ->assertSeeText('Hồ sơ cá nhân')
             ->assertSee('Đơn thuê & Cọc', false)
-            ->assertSeeText('Đăng Lookbook')
+            ->assertSee('href="'.route('account.wishlist').'"', false)
+            ->assertSeeText('Sản phẩm yêu thích')
+            ->assertSee('href="'.route('account.password').'"', false)
+            ->assertSeeText('Đổi mật khẩu')
+            ->assertDontSeeText('Đăng Lookbook')
+            ->assertSee('class="border-t border-neutral-100 my-1"', false)
             ->assertSee('action="'.route('logout').'"', false)
             ->assertSeeText('Đăng xuất');
     }

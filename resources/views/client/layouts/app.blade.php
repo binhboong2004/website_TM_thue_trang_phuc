@@ -64,11 +64,10 @@
     <meta name="twitter:image" content="{{ $openGraphImage }}">
     <meta name="twitter:image:alt" content="{{ $openGraphImageAlt }}">
 
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) with Vietnamese Support -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <link rel="preload" href="{{ asset('fonts/Inter-400-vietnamese.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ asset('fonts/PlayfairDisplay-400-vietnamese.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap&subset=vietnamese" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')

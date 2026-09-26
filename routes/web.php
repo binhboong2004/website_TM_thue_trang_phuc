@@ -6,10 +6,12 @@ use App\Http\Controllers\Client\Auth\RegisteredUserController;
 use App\Http\Controllers\Client\CatalogController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LookbookController;
+use App\Http\Controllers\Client\PasswordController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\RentalOrderController;
 use App\Http\Controllers\Client\VirtualFittingController;
+use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Shop\DashboardController as ShopDashboardController;
 use App\Http\Controllers\Shop\InventoryController as ShopInventoryController;
 use App\Http\Controllers\Shop\OrderController as ShopOrderController;
@@ -29,6 +31,10 @@ Route::middleware('guest')->group(function (): void {
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('wishlist.toggle');
 
 Route::get('/shop', [CatalogController::class, 'index'])->name('client.shop');
 Route::view('/collections/{category}', 'client.pages.collections.show')
@@ -52,6 +58,9 @@ Route::middleware('auth')
     ->group(function (): void {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/password', [PasswordController::class, 'edit'])->name('account.password');
+        Route::put('/password', [PasswordController::class, 'update'])->name('account.password.update');
+        Route::get('/wishlist', [WishlistController::class, 'index'])->name('account.wishlist');
     });
 
 Route::view('/checkout', 'client.pages.checkout')->name('checkout');

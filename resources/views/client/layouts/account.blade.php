@@ -29,18 +29,18 @@
                     </li>
                     <li>
                         <a
-                            href="{{ Route::has('account.wishlist.index') ? route('account.wishlist.index') : url('/account/wishlist') }}"
-                            class="block border-l-2 py-3 pl-4 text-xs font-medium uppercase tracking-wider transition-all {{ request()->routeIs('account.wishlist.*') ? 'border-black text-black' : 'border-transparent text-neutral-500 hover:border-neutral-200 hover:text-black' }}"
-                            @if (request()->routeIs('account.wishlist.*')) aria-current="page" @endif
+                            href="{{ route('account.wishlist') }}"
+                            class="block border-l-2 py-3 pl-4 text-xs font-medium uppercase tracking-wider transition-all {{ request()->routeIs('account.wishlist') ? 'border-black text-black' : 'border-transparent text-neutral-500 hover:border-neutral-200 hover:text-black' }}"
+                            @if (request()->routeIs('account.wishlist')) aria-current="page" @endif
                         >
                             Sản phẩm yêu thích
                         </a>
                     </li>
                     <li>
                         <a
-                            href="{{ Route::has('account.password.edit') ? route('account.password.edit') : url('/account/password') }}"
-                            class="block border-l-2 py-3 pl-4 text-xs font-medium uppercase tracking-wider transition-all {{ request()->routeIs('account.password.*') ? 'border-black text-black' : 'border-transparent text-neutral-500 hover:border-neutral-200 hover:text-black' }}"
-                            @if (request()->routeIs('account.password.*')) aria-current="page" @endif
+                            href="{{ route('account.password') }}"
+                            class="block border-l-2 py-3 pl-4 text-xs font-medium uppercase tracking-wider transition-all {{ request()->routeIs('account.password', 'account.password.*') ? 'border-black text-black' : 'border-transparent text-neutral-500 hover:border-neutral-200 hover:text-black' }}"
+                            @if (request()->routeIs('account.password', 'account.password.*')) aria-current="page" @endif
                         >
                             Đổi mật khẩu
                         </a>

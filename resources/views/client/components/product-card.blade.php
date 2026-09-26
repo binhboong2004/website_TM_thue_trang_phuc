@@ -8,11 +8,13 @@
     $productBrand = data_get($product, 'brand');
     $productName = data_get($product, 'name');
     $productStatus = data_get($product, 'status', 'CÓ SẴN');
-    $rentalPrice = (int) data_get($product, 'rentalPrice');
+    $rentalPrice = (int) data_get($product, 'rentalPrice', data_get($product, 'rental_price'));
     $deposit = (int) data_get($product, 'deposit');
-    $purchasePrice = (int) data_get($product, 'purchasePrice');
+    $purchasePrice = (int) data_get($product, 'purchasePrice', data_get($product, 'purchase_price'));
     $sizes = data_get($product, 'sizes', []);
     $modalTitleId = 'rental-modal-title-'.$productId;
+    $isAuthenticated = auth()->check();
+    $isFavorited = $isAuthenticated && auth()->user()->favoriteProducts->contains($productId);
 
     $cartProduct = [
         'id' => $productId,
@@ -29,7 +31,7 @@
 <article
     class="group min-w-0"
     x-data="{
-        liked: false,
+        visible: true,
         rentalOpen: false,
         rentalStart: '',
         rentalEnd: '',
@@ -76,6 +78,8 @@
             this.$nextTick(() => this.$dispatch('cart-drawer-open'));
         },
     }"
+    x-show="visible"
+    x-transition.opacity.duration.300ms
 >
     <div class="relative aspect-[3/4] overflow-hidden bg-[#F7F7F7]">
         <a href="{{ $productUrl }}" class="block h-full overflow-hidden" aria-label="Xem {{ $productName }}">
@@ -97,20 +101,62 @@
 
         <button
             type="button"
-            class="absolute right-2.5 top-2.5 flex size-11 items-center justify-center rounded-full bg-white/80 text-neutral-950 backdrop-blur-sm transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 motion-reduce:transition-none"
-            :class="liked && 'scale-105'"
-            :aria-pressed="liked"
-            aria-label="Thêm {{ $productName }} vào yêu thích"
-            @click="liked = !liked"
+            x-data="{ favorited: @js($isFavorited), processing: false }"
+            class="absolute top-4 right-4 z-10 p-2 focus:outline-none transition-transform duration-300 hover:scale-110"
+            :aria-pressed="favorited"
+            :aria-label="favorited ? @js('Bỏ '.$productName.' khỏi yêu thích') : @js('Thêm '.$productName.' vào yêu thích')"
+            :disabled="processing"
+            @click.prevent="
+                if (!@js($isAuthenticated)) {
+                    window.location.href = @js(route('login'));
+                    return;
+                }
+
+                processing = true;
+
+                fetch(@js(route('wishlist.toggle')), {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': @js(csrf_token()),
+                    },
+                    body: JSON.stringify({ product_id: @js($productId) }),
+                })
+                    .then(async response => {
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(data.message || 'Không thể cập nhật danh sách yêu thích');
+                        }
+
+                        return data;
+                    })
+                    .then(data => {
+                        favorited = data.status === 'added';
+                        $dispatch('show-toast', { message: data.message });
+
+                        const isWishlistPage = @js(request()->routeIs('account.wishlist'));
+
+                        if (data.status === 'removed' && isWishlistPage) {
+                            visible = false;
+                        }
+                    })
+                    .catch(error => {
+                        $dispatch('show-toast', { message: error.message });
+                    })
+                    .finally(() => {
+                        processing = false;
+                    });
+            "
         >
             <svg
                 aria-hidden="true"
-                class="size-[19px] transition-transform duration-200 motion-reduce:transition-none"
-                :class="liked && 'scale-110'"
+                class="size-5 transition-colors duration-300 motion-reduce:transition-none"
+                :class="favorited ? 'fill-white text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]' : 'fill-transparent text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:fill-white/30'"
                 viewBox="0 0 24 24"
-                :fill="liked ? 'currentColor' : 'none'"
                 stroke="currentColor"
-                stroke-width="1.2"
+                stroke-width="1.5"
             >
                 <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" />
             </svg>

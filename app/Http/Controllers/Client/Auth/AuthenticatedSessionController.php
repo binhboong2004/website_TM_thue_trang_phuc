@@ -41,7 +41,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home'));
+        return redirect()
+            ->intended(route('home'))
+            ->with('success', 'Đăng nhập thành công. Chào mừng trở lại.');
     }
 
     /**

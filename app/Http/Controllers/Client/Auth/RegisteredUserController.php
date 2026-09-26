@@ -48,6 +48,8 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('home');
+        return redirect()
+            ->route('home')
+            ->with('success', 'Tạo tài khoản thành công. Chào mừng bạn đến với LUXE ROTATE.');
     }
 }

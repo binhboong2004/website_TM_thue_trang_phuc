@@ -5,56 +5,22 @@
 @section('canonical', url('/account/wishlist'))
 @section('robots', 'noindex, nofollow')
 
-@php
-    $wishlistProducts = [
-        [
-            'id' => 'noir-sculpted-gown',
-            'image' => asset('images/editorial/black-gown.webp'),
-            'position' => 'center',
-            'brand' => 'Maison Élan',
-            'name' => 'Noir Sculpted Gown',
-            'url' => route('products.show', 'noir-sculpted-gown'),
-            'status' => 'CÓ SẴN',
-            'rentalPrice' => 890000,
-            'deposit' => 2500000,
-            'purchasePrice' => 6800000,
-            'sizes' => ['XS', 'S', 'M'],
-        ],
-        [
-            'id' => 'ivory-fluid-suit',
-            'image' => asset('images/editorial/hero-campaign.webp'),
-            'position' => '52% center',
-            'brand' => 'Atelier Blanc',
-            'name' => 'Ivory Fluid Suit',
-            'url' => route('products.show', 'ivory-fluid-suit'),
-            'status' => 'CÓ SẴN',
-            'rentalPrice' => 760000,
-            'deposit' => 2200000,
-            'purchasePrice' => 5900000,
-            'sizes' => ['S', 'M'],
-        ],
-        [
-            'id' => 'graphite-column-dress',
-            'image' => asset('images/editorial/city-lookbook.webp'),
-            'position' => '72% center',
-            'brand' => 'Studio N°5',
-            'name' => 'Graphite Column Dress',
-            'url' => route('products.show', 'graphite-column-dress'),
-            'status' => 'CÓ SẴN',
-            'rentalPrice' => 690000,
-            'deposit' => 1900000,
-            'purchasePrice' => 5200000,
-            'sizes' => ['XS', 'S'],
-        ],
-    ];
-@endphp
-
 @section('account_content')
-    <h1 class="text-4xl font-serif mb-10">Sản phẩm yêu thích</h1>
+    <h1 class="mb-8 font-serif text-3xl">Sản phẩm yêu thích</h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($wishlistProducts as $product)
-            <x-client::product-card :product="$product" />
-        @endforeach
-    </div>
+    @if ($wishlists->isEmpty())
+        <div class="border border-neutral-200 p-12 text-center">
+            <p class="mb-2 font-serif text-xl">Bạn chưa lưu thiết kế nào</p>
+            <p class="mb-6 text-xs leading-6 text-neutral-500">Lưu những thiết kế bạn yêu thích để dễ dàng quay lại và lựa chọn khi cần.</p>
+            <a href="{{ route('client.shop') }}" class="inline-flex min-h-12 items-center justify-center rounded-none bg-black px-8 py-4 text-[10px] font-medium uppercase tracking-widest text-white transition-colors hover:bg-neutral-800">
+                Khám phá bộ sưu tập
+            </a>
+        </div>
+    @else
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach ($wishlists as $item)
+                <x-client::product-card :product="$item" />
+            @endforeach
+        </div>
+    @endif
 @endsection
